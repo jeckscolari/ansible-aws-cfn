@@ -1,8 +1,11 @@
-deploy:
-  provider: cloudformation
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  region: $AWS_REGION
-  template: cfn/s3_stack.yml
-  stack_name: s3_stack
-  edge: true
+before_install:
+  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  - unzip awscliv2.zip
+  - sudo ./aws/install
+
+jobs:
+  include:
+    - stage: upload
+      script: scripts/upload.sh
+    # - stage: deploy
+    #   script: scripts/deploy.sh
