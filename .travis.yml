@@ -5,3 +5,4 @@ deploy:
   region: $AWS_REGION
   template: cfn/s3_stack.yml
   stack_name: s3_stack
+  edge: true
