@@ -3,5 +3,5 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   region: $AWS_REGION
-  template: cfn/s3_stack.yaml
+  template: cfn/s3_stack.yml
   stack_name: s3_stack
