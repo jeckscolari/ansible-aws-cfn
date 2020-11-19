@@ -1,8 +1,8 @@
 language: python
 python:
-  - '3.8'
+  - '3.6'
 
-install:
+before_install:
   - pip install -r requirements.txt -q
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip > /dev/null
@@ -10,7 +10,8 @@ install:
 
 jobs:
   include:
-    - stage: upload-cfn-templates
+    - stage: update-infrastructure
+      name: upload-cfn-templates
       script: scripts/upload_templates.sh
-    - stage: create-cfn-stacks
-      script: scripts/create_templates.sh
+    - name: create-cfn-stacks
+      script: scripts/create_stacks.sh
