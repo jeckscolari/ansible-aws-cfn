@@ -10,8 +10,7 @@ before_install:
 
 jobs:
   include:
-    - stage: update-infrastructure
-      name: upload-cfn-templates
+    - stage: upload-cfn-templates
       script: scripts/upload_templates.sh
-    - name: create-cfn-stacks
+    - stage: create-cfn-stacks
       script: scripts/create_stacks.sh
