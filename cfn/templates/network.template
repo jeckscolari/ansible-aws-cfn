@@ -1,4 +1,4 @@
-Description: Deploy a VPC with two public and private subnets, across two AZs. Also an Internet Gateway and two NAT Gateways are provisioned.
+Description: Deploy a VPC with two public and two private subnets (across two AZs), an Internet Gateway and two NAT gateways.
 Parameters:
   TagEnv:
     Description: An environment name that will be prefixed to resource names

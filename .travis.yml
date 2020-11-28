@@ -1,27 +1,19 @@
-env:
-  global:
-    - S3_CFN_TEMPLATES=ansible-cfn/templates
-    - LATEST_COMMIT='$(git rev-parse HEAD)'
-
 jobs:
   include:
     - stage: update cfn templates
-      env:
-        - CFN_TEMPLATES_COMMIT='$(git log -1 --format=format:%H --full-diff cfn/templates)'
-      if: env(LATEST_COMMIT) = env(CFN_TEMPLATES_COMMIT)
       install:
         - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         - unzip awscliv2.zip > /dev/null
         - sudo ./aws/install
       script:
-        - aws s3 cp cfn/templates/* s3://${S3_CFN_TEMPLATES}
+        - scripts/run_if_changed.sh cfn/templates scripts/update_templates.sh
 
     - stage: create network
       language: python
       python:
         - 3.7
       env:
-        - TEMPLATE_URL=https://s3.amazonaws.com/${S3_CFN_TEMPLATES}/network.template
+        - TEMPLATE_URL=https://s3.amazonaws.com/ansible-cfn/templates/network.template
         - AWS_REGION=eu-central-1
         - TAG_ENVIRONMENT=ansible-cfn
         - VPC_CIDR=10.0.0.0/24
