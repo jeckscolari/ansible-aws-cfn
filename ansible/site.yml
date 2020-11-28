@@ -1,3 +1,0 @@
----
-- import_playbook: playbooks/10_cfn_network.yml
-- import_playbook: playbooks/20_cfn_compute.yml
