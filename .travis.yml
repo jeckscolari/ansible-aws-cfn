@@ -6,7 +6,7 @@ jobs:
         - unzip awscliv2.zip > /dev/null
         - sudo ./aws/install
       script:
-        - scripts/run_if_changed.sh cfn/templates scripts/update_templates.sh
+        - scripts/update_templates.sh
 
     - stage: create network
       language: python
