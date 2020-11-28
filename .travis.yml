@@ -1,16 +1,21 @@
-language: python
-python:
-  - '3.6'
-
-before_install:
-  - pip install -r requirements.txt -q
-  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  - unzip awscliv2.zip > /dev/null
-  - sudo ./aws/install
-
 jobs:
   include:
-    - stage: upload-cfn-templates
-      script: scripts/upload_templates.sh
-    - stage: create-cfn-stacks
-      script: scripts/create_stacks.sh
+    - stage: create network
+      language: python
+      python:
+        - 3.7
+      env:
+        - TEMPLATE_URL=https://s3.amazonaws.com/ansible-cfn/cfn/templates/network.template
+        - AWS_REGION=eu-central-1
+        - TAG_ENVIRONMENT=ansible-cfn
+        - VPC_CIDR=10.0.0.0/24
+        - PUBLIC_SUBNET_1_CIDR=10.0.0.0/28
+        - PUBLIC_SUBNET_2_CIDR=10.0.0.16/28
+        - PRIVATE_SUBNET_1_CIDR=10.0.0.32/28
+        - PRIVATE_SUBNET_2_CIDR=10.0.0.48/28
+      before_install:
+        - cd ansible
+      install:
+        - pip install -r ansible/requirements.txt -q
+      script:
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/10_cfn_network.yml --tags create -vvv

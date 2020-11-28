@@ -1,0 +1,3 @@
+---
+stack_name: 'ansible-cfn-compute'
+network_stack_name: 'ansible-cfn-network'

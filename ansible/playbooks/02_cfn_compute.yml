@@ -1,0 +1,8 @@
+---
+- name: provision ec2 instances in an asg with a load balancer
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  roles:
+    - role: cfn_compute
