@@ -16,6 +16,6 @@ jobs:
       before_install:
         - cd ansible
       install:
-        - pip install -r ansible/requirements.txt -q
+        - pip install -r requirements.txt -q
       script:
         - ansible-playbook -i inventories/aws_ec2.yml playbooks/10_cfn_network.yml --tags create -vvv
