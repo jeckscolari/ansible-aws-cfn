@@ -2,8 +2,7 @@
 - name: get facts about the {{ network_stack_name }} stack
   amazon.aws.cloudformation_info:
     stack_name: '{{ network_stack_name }}'
-  register: network_stack_facts
-  failed_when: cloudformation[network_stack_name] is undefined
+  register: network_stack_info
 
 - name: update stack template on s3 bucket
   amazon.aws.aws_s3:
@@ -14,8 +13,8 @@
 
 - name: create the {{ stack_name }} stack, pass in the template via an url
   vars:
-    network_output: '{{ network_stack_facts.ansible_facts.cloudformation[network_stack_name].stack_outputs }}'
-  cloudformation:
+    network_output: '{{ network_stack_info.cloudformation[network_stack_name].stack_outputs }}'
+  amazon.aws.cloudformation:
     stack_name: '{{ stack_name }}'
     state: present
     region: "{{ lookup('env','AWS_REGION') }}"
@@ -25,8 +24,8 @@
       VpcId: '{{ network_output.VPC }}'
       Subnets: '{{ network_output.PublicSubnets }}'
       InstanceType: "{{  lookup('env','INSTANCE_TYPE') }}"
-      KeyName: "{{  lookup('env','KEY_NAME') }}"
-      SSHLocation: "{{ lookup('env','SSH_LOCATION') }}"
+      KeyName: "{{  lookup('aws_ssm',key_name) }}"
+      SSHLocation: "{{ lookup('aws_ssm',ssh_location) }}"
       TagName: "{{  lookup('env','TAG_NAME') }}"
       TagGroup: "{{  lookup('env','TAG_GROUP') }}"
       TagEnv: "{{ lookup('env','TAG_ENVIRONMENT') }}"

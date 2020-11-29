@@ -8,3 +8,7 @@ bucket_name: "{{ lookup('env','S3_BUCKET') }}"
 object_path: /templates/compute.template
 
 file_path: compute.template
+
+key_name: "{{  lookup('env','KEY_NAME') }}"
+
+ssh_location: "{{ lookup('env','SSH_LOCATION') }}"
