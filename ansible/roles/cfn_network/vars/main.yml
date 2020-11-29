@@ -1,0 +1,8 @@
+---
+stack_name: ansible-cfn-network
+
+bucket_name: "{{ lookup('env','S3_BUCKET') }}"
+
+object_path: /templates/network.template
+
+file_path: network.template
