@@ -1,6 +1,7 @@
 jobs:
   include:
-    - stage: create network
+    - stage: provision infrastructure
+      name: create vpc and subnets
       language: python
       python:
         - 3.7
@@ -13,7 +14,6 @@ jobs:
         - PUBLIC_SUBNET_2_CIDR=10.0.0.16/28
         - PRIVATE_SUBNET_1_CIDR=10.0.0.32/28
         - PRIVATE_SUBNET_2_CIDR=10.0.0.48/28
-        -
       before_install:
         - cd ansible
       install:
@@ -22,3 +22,15 @@ jobs:
         - ansible-galaxy collection install amazon.aws
       script:
         - ansible-playbook -i inventories/aws_ec2.yml playbooks/10_cfn_network.yml --tags create -vvv
+
+    - name: create ec2 instances in an asg with a load balancer
+      env:
+        - AWS_REGION=eu-central-1
+        - TAG_ENVIRONMENT=ansible-cfn
+        - S3_BUCKET=ansible-cfn
+        - TAG_NAME=Apache Web Server
+        - TAG_GROUP=webservers
+      before_install:
+        - cd ansible
+      script:
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/20_cfn_compute.yml --tags create -vvv
