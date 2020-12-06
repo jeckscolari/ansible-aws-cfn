@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KEY_PATH="../.ssh/ansible.pem"
+KEY_PATH=".ssh/ansible"
 PARAMETER_PATH="/ansible-cfn"
 
 aws ssm put-parameter \
@@ -23,8 +23,3 @@ aws ssm put-parameter \
   --value "ansible" \
   --description "SSH key name" \
   --overwrite
-
-aws ssm get-parameter \
-  --with-decryption \
-  --name $PARAMETER_PATH/ansible_private_key \
-  --query Parameter.Value
