@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KEY_PATH=".ssh/ansible.pem"
+KEY_PATH="../.ssh/ansible.pem"
 PARAMETER_PATH="/ansible-cfn"
 
 aws ssm put-parameter \

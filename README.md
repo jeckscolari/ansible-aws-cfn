@@ -17,3 +17,7 @@ This project contains all the code necessary to provision the infrastructure and
 -   [Ansible](https://www.ansible.com)
 -   [AWS CloudFormation](https://aws.amazon.com/cloudformation)
 -   [Travis CI](https://travis-ci.org)
+
+## Acknowledgements
+
+This project is heavily inspired by this awesome [article](https://programmaticponderings.com/2019/07/30/managing-aws-infrastructure-as-code-using-ansible-cloudformation-and-codebuild) by Gary Stafford.

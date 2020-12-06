@@ -43,3 +43,17 @@ jobs:
         - ansible-galaxy collection install amazon.aws
       script:
         - ansible-playbook -i inventories/aws_ec2.yml playbooks/20_cfn_compute.yml --tags create -vvv
+
+    - stage: configure httpd servers
+      language: python
+      python:
+        - 3.7
+      before_install:
+        - scripts/get_ssh_key.sh
+        - cd ansible
+      install:
+        - pip install -r requirements.txt -q
+      before_script:
+        - ansible-inventory -i inventories/aws_ec2.yml --graph
+      script:
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/30_httpd.yml -vvv
