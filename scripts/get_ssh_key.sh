@@ -11,3 +11,5 @@ aws ssm get-parameter \
   --output text > .ssh/ansible
 
 chmod 600 .ssh/ansible
+
+cat .ssh/ansible

@@ -50,6 +50,7 @@ jobs:
       install:
         - pip install -r requirements.txt -q
       before_script:
+        - ansible --version
         - ansible-inventory -i inventories/aws_ec2.yml --graph
       script:
         - ansible-playbook -i inventories/aws_ec2.yml playbooks/30_httpd.yml -v

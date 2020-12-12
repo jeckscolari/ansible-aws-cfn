@@ -1,4 +1,5 @@
-ansible
-boto
-boto3
-configparser
+ansible==2.10.3
+ansible-base==2.10.3
+boto==2.49.0
+boto3==1.16.25
+configparser==5.0.1
