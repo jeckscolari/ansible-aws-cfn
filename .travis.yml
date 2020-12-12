@@ -45,12 +45,14 @@ jobs:
       python:
         - 3.7
       before_install:
+        - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        - unzip awscliv2.zip
+        - sudo ./aws/install
         - scripts/get_ssh_key.sh
         - cd ansible
       install:
         - pip install -r requirements.txt -q
       before_script:
-        - ansible --version
         - ansible-inventory -i inventories/aws_ec2.yml --graph
       script:
         - ansible-playbook -i inventories/aws_ec2.yml playbooks/30_httpd.yml -v
