@@ -4,14 +4,14 @@
     stack_name: '{{ network_stack_name }}'
   register: network_stack_info
 
-- name: update stack template on s3 bucket
-  amazon.aws.aws_s3:
-    bucket: '{{ bucket_name }}'
-    object: '{{ object_path }}'
-    src: '{{ file_path }}'
-    mode: put
+# - name: update stack template on s3 bucket
+#   amazon.aws.aws_s3:
+#     bucket: '{{ bucket_name }}'
+#     object: '{{ object_path }}'
+#     src: '{{ file_path }}'
+#     mode: put
 
-- name: create the {{ stack_name }} stack, pass in the template via an url
+- name: create the {{ stack_name }} stack
   vars:
     network_output: '{{ network_stack_info.cloudformation[network_stack_name].stack_outputs }}'
   amazon.aws.cloudformation:
@@ -19,7 +19,7 @@
     state: present
     region: "{{ lookup('env','AWS_REGION') }}"
     disable_rollback: false
-    template_url: 'https://s3.amazonaws.com/{{ bucket_name }}{{ object_path }}'
+    template_url: '{{ file_path }}'
     template_parameters:
       VpcId: '{{ network_output.VPC }}'
       Subnets: '{{ network_output.PublicSubnets }}'
