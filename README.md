@@ -10,7 +10,11 @@
   <img src="images/aws_vpc.svg" width="80%">
 </p>
 
-This project contains all the code necessary to provision the infrastructure and configure a simple web application on AWS. I recently started exploring the magical world of CI/CD, IaC and configuration management and my goal here is to automatically manage the infrastructure and configuration of an application from source code, minimizing manual intervention as much as possible.
+This project contains all the code necessary to provision the infrastructure and configure a simple web application on AWS. My goal here is to automatically manage the infrastructure and configuration of an application from source code, minimizing manual intervention as much as possible.
+
+The CloudFormation templates used to provision the network components (VPC, subnets, route tables and gateways) and the computing resources (load balancer, EC2 instances and Auto Scaling group) are in the `cfn` directory. The above image should give you a decent overview of the provisioned infrastructure. 
+
+In the `ansible` directory contains all the Ansible related files (duh!), used to manage and orchestrate the creation of the infrastructure and the configuration of the web servers.
 
 ### Built With
 
