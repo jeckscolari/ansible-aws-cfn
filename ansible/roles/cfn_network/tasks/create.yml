@@ -1,18 +1,11 @@
 ---
-# - name: update stack template on s3 bucket
-#   amazon.aws.aws_s3:
-#     bucket: '{{ bucket_name }}'
-#     object: '{{ object_path }}'
-#     src: '{{ file_path }}'
-#     mode: put
-
 - name: create the {{ stack_name }} stack
   amazon.aws.cloudformation:
     stack_name: '{{ stack_name }}'
     state: present
     region: "{{ lookup('env','AWS_REGION') }}"
     disable_rollback: false
-    template_url: '{{ file_path }}'
+    template: '{{ file_path }}'
     template_parameters:
       VpcCIDR: "{{ lookup('env','VPC_CIDR') }}"
       PublicSubnet1CIDR: "{{ lookup('env','PUBLIC_SUBNET_1_CIDR') }}"

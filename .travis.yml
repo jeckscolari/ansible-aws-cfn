@@ -7,7 +7,6 @@ jobs:
       env:
         - AWS_REGION=eu-central-1
         - TAG_ENVIRONMENT=ansible-cfn
-        - S3_BUCKET=ansible-cfn
         - VPC_CIDR=10.0.0.0/24
         - PUBLIC_SUBNET_1_CIDR=10.0.0.0/28
         - PUBLIC_SUBNET_2_CIDR=10.0.0.16/28
@@ -29,7 +28,6 @@ jobs:
       env:
         - AWS_REGION=eu-central-1
         - TAG_ENVIRONMENT=ansible-cfn
-        - S3_BUCKET=ansible-cfn
         - TAG_NAME="Apache Web Server"
         - TAG_GROUP=webservers
         - INSTANCE_TYPE=t2.small

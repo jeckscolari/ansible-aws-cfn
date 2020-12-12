@@ -3,10 +3,6 @@ stack_name: 'ansible-cfn-compute'
 
 network_stack_name: 'ansible-cfn-network'
 
-bucket_name: "{{ lookup('env','S3_BUCKET') }}"
-
-object_path: /templates/compute.template
-
 file_path: compute.template
 
 key_name: "{{  lookup('env','KEY_NAME') }}"
