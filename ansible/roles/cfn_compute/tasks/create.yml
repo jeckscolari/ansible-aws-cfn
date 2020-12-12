@@ -16,11 +16,11 @@
     template_parameters:
       VpcId: '{{ network_output.VPC }}'
       Subnets: '{{ network_output.PublicSubnets }}'
-      InstanceType: "{{  lookup('env','INSTANCE_TYPE') }}"
-      KeyName: "{{  lookup('aws_ssm',key_name) }}"
+      InstanceType: "{{ lookup('env','INSTANCE_TYPE') }}"
+      KeyName: "{{ lookup('aws_ssm',key_name) }}"
       SSHLocation: "{{ lookup('aws_ssm',ssh_location) }}"
-      TagName: "{{  lookup('env','TAG_NAME') }}"
-      TagGroup: "{{  lookup('env','TAG_GROUP') }}"
+      TagName: "{{ lookup('env','TAG_NAME') }}"
+      TagGroup: "{{ lookup('env','TAG_GROUP') }}"
       TagEnv: "{{ lookup('env','TAG_ENVIRONMENT') }}"
     tags:
       Stack: '{{ stack_name }}'
