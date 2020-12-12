@@ -1,4 +1,4 @@
 ---
 stack_name: ansible-cfn-network
 
-file_path: network.template
+file_path: '{{ role_path }}/../../../cfn/network.template'

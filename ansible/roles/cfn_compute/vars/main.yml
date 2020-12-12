@@ -3,7 +3,7 @@ stack_name: 'ansible-cfn-compute'
 
 network_stack_name: 'ansible-cfn-network'
 
-file_path: compute.template
+file_path: '{{ role_path }}/../../../cfn/compute.template'
 
 key_name: "{{  lookup('env','KEY_NAME') }}"
 
