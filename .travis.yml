@@ -10,8 +10,6 @@ jobs:
         - VPC_CIDR=10.0.0.0/24
         - PUBLIC_SUBNET_1_CIDR=10.0.0.0/28
         - PUBLIC_SUBNET_2_CIDR=10.0.0.16/28
-        - PRIVATE_SUBNET_1_CIDR=10.0.0.32/28
-        - PRIVATE_SUBNET_2_CIDR=10.0.0.48/28
       before_install:
         - cd ansible
       install:
@@ -19,7 +17,7 @@ jobs:
       before_script:
         - ansible-galaxy collection install amazon.aws
       script:
-        - ansible-playbook -i inventories/aws_ec2.yml playbooks/10_cfn_network.yml --tags create -vvv
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/10_cfn_network.yml --tags create -v
 
     - stage: create ec2 instances in an asg with a load balancer
       language: python
@@ -40,7 +38,7 @@ jobs:
       before_script:
         - ansible-galaxy collection install amazon.aws
       script:
-        - ansible-playbook -i inventories/aws_ec2.yml playbooks/20_cfn_compute.yml --tags create -vvv
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/20_cfn_compute.yml --tags create -v
 
     - stage: configure httpd servers
       language: python
@@ -54,4 +52,4 @@ jobs:
       before_script:
         - ansible-inventory -i inventories/aws_ec2.yml --graph
       script:
-        - ansible-playbook -i inventories/aws_ec2.yml playbooks/30_httpd.yml -vvv
+        - ansible-playbook -i inventories/aws_ec2.yml playbooks/30_httpd.yml -v
