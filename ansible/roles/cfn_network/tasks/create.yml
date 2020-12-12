@@ -10,8 +10,6 @@
       VpcCIDR: "{{ lookup('env','VPC_CIDR') }}"
       PublicSubnet1CIDR: "{{ lookup('env','PUBLIC_SUBNET_1_CIDR') }}"
       PublicSubnet2CIDR: "{{ lookup('env','PUBLIC_SUBNET_2_CIDR') }}"
-      PrivateSubnet1CIDR: "{{ lookup('env','PRIVATE_SUBNET_1_CIDR') }}"
-      PrivateSubnet2CIDR: "{{ lookup('env','PRIVATE_SUBNET_2_CIDR') }}"
       TagEnv: "{{ lookup('env','TAG_ENVIRONMENT') }}"
     tags:
       Stack: '{{ stack_name }}'
